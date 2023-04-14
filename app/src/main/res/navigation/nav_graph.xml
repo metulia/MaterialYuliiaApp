@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.materialyuliiaapp.ui.FirstFragment"
+        android:name="com.example.materialyuliiaapp.ui.PictureOfTheDayFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_picture_of_the_day">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
