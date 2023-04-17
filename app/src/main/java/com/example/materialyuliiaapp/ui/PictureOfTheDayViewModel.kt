@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PictureOfTheDayViewModel(
-    private val liveData: MutableLiveData<AppState>,
+    private val liveData: MutableLiveData<AppState> = MutableLiveData(),
     private val repositoryImpl: RepositoryImpl = RepositoryImpl()
 ) :
     ViewModel() {
@@ -31,11 +31,11 @@ class PictureOfTheDayViewModel(
         ) {
             if (response.isSuccessful) {
                 liveData.postValue(AppState.Success(response.body()!!))
-            } else liveData.postValue(AppState.Error(throw IllegalStateException("Ошибка!")))
+            }
         }
 
         override fun onFailure(call: Call<PictureOfTheDayResponseData>, t: Throwable) {
-            TODO("Not yet implemented")
+            liveData.postValue(AppState.Error(t))
         }
     }
 }
