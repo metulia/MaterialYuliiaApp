@@ -37,6 +37,18 @@ class PictureOfTheDayFragment : Fragment() {
             renderData(appState)
         }
         viewModel.sendRequest()
+
+        binding.chipToday.setOnCloseIconClickListener {
+
+        }
+
+        binding.chipYesterday.setOnClickListener {
+
+        }
+
+        binding.chipTheDayBeforeYesterday.setOnClickListener {
+
+        }
     }
 
     private fun renderData(appState: AppState) {
