@@ -24,6 +24,16 @@ class PictureOfTheDayViewModel(
         repositoryImpl.getPictureOfTheDayApi().getPictureOfTheDay(NASA_API_KEY).enqueue(callback)
     }
 
+    fun sendRequestByDateYesterday() {
+        liveData.postValue(AppState.Loading)
+        repositoryImpl.getPictureOfTheDayApi().getPictureOfTheDayByDate(NASA_API_KEY, "2023-04-17").enqueue(callback)
+    }
+
+    fun sendRequestByDateBeforeYesterday() {
+        liveData.postValue(AppState.Loading)
+        repositoryImpl.getPictureOfTheDayApi().getPictureOfTheDayByDate(NASA_API_KEY, "2023-04-16").enqueue(callback)
+    }
+
     private val callback = object : Callback<PictureOfTheDayResponseData> {
         override fun onResponse(
             call: Call<PictureOfTheDayResponseData>,

@@ -40,16 +40,16 @@ class PictureOfTheDayFragment : Fragment() {
         }
         viewModel.sendRequest()
 
-        binding.chipToday.setOnCloseIconClickListener {
-
+        binding.chipToday.setOnClickListener {
+            viewModel.sendRequest()
         }
 
         binding.chipYesterday.setOnClickListener {
-
+            viewModel.sendRequestByDateYesterday()
         }
 
         binding.chipTheDayBeforeYesterday.setOnClickListener {
-
+            viewModel.sendRequestByDateBeforeYesterday()
         }
 
         binding.inputLayout.setEndIconOnClickListener {
