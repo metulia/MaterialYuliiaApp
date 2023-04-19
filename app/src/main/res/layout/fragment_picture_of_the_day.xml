@@ -50,7 +50,7 @@
         app:counterMaxLength="20"
         app:helperText="@string/wiki_helper_text"
         app:endIconMode="custom"
-        app:endIconDrawable="@mipmap/ic_launcher_round"
+        app:endIconDrawable="@drawable/ic_wiki"
         app:endIconCheckable="true"
         app:layout_constraintTop_toBottomOf="@+id/chip_group">
 
