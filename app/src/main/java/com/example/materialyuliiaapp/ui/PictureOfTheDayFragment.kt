@@ -1,9 +1,13 @@
 package com.example.materialyuliiaapp.ui
 
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
@@ -30,6 +34,7 @@ class PictureOfTheDayFragment : Fragment() {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,6 +42,26 @@ class PictureOfTheDayFragment : Fragment() {
             renderData(appState)
         }
         viewModel.sendRequest()
+
+        binding.chipToday.setOnClickListener {
+            viewModel.sendRequest()
+        }
+
+        binding.chipYesterday.setOnClickListener {
+            viewModel.sendRequestByDateYesterday()
+        }
+
+        binding.chipTheDayBeforeYesterday.setOnClickListener {
+            viewModel.sendRequestByDateBeforeYesterday()
+        }
+
+        binding.inputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+            })
+        }
+
     }
 
     private fun renderData(appState: AppState) {

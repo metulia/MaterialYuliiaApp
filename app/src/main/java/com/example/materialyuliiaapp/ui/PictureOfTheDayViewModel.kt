@@ -1,5 +1,7 @@
 package com.example.materialyuliiaapp.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.materialyuliiaapp.BuildConfig.NASA_API_KEY
@@ -22,6 +24,22 @@ class PictureOfTheDayViewModel(
     fun sendRequest() {
         liveData.postValue(AppState.Loading)
         repositoryImpl.getPictureOfTheDayApi().getPictureOfTheDay(NASA_API_KEY).enqueue(callback)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun sendRequestByDateYesterday() {
+        liveData.postValue(AppState.Loading)
+        repositoryImpl.getPictureOfTheDayApi()
+            .getPictureOfTheDayByDate(NASA_API_KEY, repositoryImpl.getDateYesterday())
+            .enqueue(callback)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun sendRequestByDateBeforeYesterday() {
+        liveData.postValue(AppState.Loading)
+        repositoryImpl.getPictureOfTheDayApi()
+            .getPictureOfTheDayByDate(NASA_API_KEY, repositoryImpl.getDateDayBeforeYesterday())
+            .enqueue(callback)
     }
 
     private val callback = object : Callback<PictureOfTheDayResponseData> {
