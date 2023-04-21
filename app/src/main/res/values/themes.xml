@@ -3,21 +3,44 @@
     <style name="Base.Theme.MaterialYuliiaApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-       <item name="myColor">#FF1493</item>
-        <item name="colorPrimary">#DB7093</item>
-        <item name="colorAccent">#C71585</item>
-        <item name="colorOnSurface">?attr/myColor</item>
-        <item name="colorSurface">#FF69B4</item>
-        <item name="colorSecondary">#FFB6C1</item>
+        
         <item name="textAppearanceLabelLarge">@style/MyTextAppearanceBody2</item>
     </style>
 
+    <style name="MyEarthTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="myColor">@color/RosyBrown</item>
+        <item name="colorPrimary">@color/Chocolate</item>
+        <item name="colorAccent">@color/SaddleBrown</item>
+        <item name="colorOnSurface">?attr/myColor</item>
+        <item name="colorSurface">@color/Sienna</item>
+        <item name="colorSecondary">@color/Peru</item>
+        <item name="colorPrimaryVariant">@color/DarkGoldenRod</item>
+        <item name="colorTertiary">@color/Goldenrod</item>
+        <item name="colorOnPrimary">@color/SandyBrown</item>
+    </style>
+
     <style name="MyMoonTheme" parent="Base.Theme.MaterialYuliiaApp">
-        <item name="myColor">#DAA520</item>
+        <item name="myColor">@color/Gold</item>
+        <item name="colorPrimary">@color/LemonChiffon</item>
+        <item name="colorAccent">@color/PapayaWhip</item>
+        <item name="colorOnSurface">?attr/myColor</item>
+        <item name="colorSurface">@color/Moccasin</item>
+        <item name="colorSecondary">@color/PaleGoldenrod</item>
+        <item name="colorOnSecondary">@color/Khaki</item>
+        <item name="colorTertiary">@color/DarkKhaki</item>
+        <item name="colorPrimaryContainer">@color/Yellow</item>
     </style>
 
     <style name="MyMarsTheme" parent="Base.Theme.MaterialYuliiaApp">
-        <item name="myColor">#B22222</item>
+        <item name="myColor">@color/IndianRed</item>
+        <item name="colorPrimary">@color/LightCoral</item>
+        <item name="colorAccent">@color/Salmon</item>
+        <item name="colorOnSurface">?attr/myColor</item>
+        <item name="colorSurface">@color/DarkRed</item>
+        <item name="colorSecondary">@color/FireBrick</item>
+        <item name="colorOnSecondary">@color/Red</item>
+        <item name="colorTertiary">@color/Crimson</item>
+        <item name="colorPrimaryContainer">@color/DarkSalmon</item>
     </style>
     
     <style name="MyTextAppearanceBody2" parent="TextAppearance.MaterialComponents.Body2">
