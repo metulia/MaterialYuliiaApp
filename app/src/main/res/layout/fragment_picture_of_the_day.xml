@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/input_layout"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
@@ -44,7 +45,7 @@
         android:id="@+id/input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/text_input_layout_padding"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         app:counterEnabled="true"
         app:counterMaxLength="20"
@@ -72,6 +73,7 @@
         android:id="@+id/ex_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_view" />
 

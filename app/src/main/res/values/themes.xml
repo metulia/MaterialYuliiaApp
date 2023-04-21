@@ -1,12 +1,32 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MaterialYuliiaApp" parent="Theme.Material3.DynamicColors.DayNight">
+    <style name="Base.Theme.MaterialYuliiaApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+       <item name="myColor">#FF1493</item>
+        <item name="colorPrimary">#DB7093</item>
+        <item name="colorAccent">#C71585</item>
+        <item name="colorOnSurface">?attr/myColor</item>
+        <item name="colorSurface">#FF69B4</item>
+        <item name="colorSecondary">#FFB6C1</item>
+        <item name="textAppearanceLabelLarge">@style/MyTextAppearanceBody2</item>
+    </style>
 
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    <style name="MyMoonTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="myColor">#DAA520</item>
+    </style>
+
+    <style name="MyMarsTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="myColor">#B22222</item>
+    </style>
+    
+    <style name="MyTextAppearanceBody2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/cherry_swash</item>
+        <item name="android:fontFamily">@font/cherry_swash</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:letterSpacing">0.1178571429</item>
     </style>
 
     <style name="Theme.MaterialYuliiaApp" parent="Base.Theme.MaterialYuliiaApp" />
