@@ -4,13 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,6 +37,8 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setHasOptionsMenu(true)
+
         viewModel.getLiveData().observe(viewLifecycleOwner) { appState ->
             renderData(appState)
         }
@@ -62,6 +63,23 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+        when (item.itemId){
+            R.id.action_favourite -> {
+
+            }
+            R.id.action_settings -> {
+
+            }
+        }
     }
 
     private fun renderData(appState: AppState) {

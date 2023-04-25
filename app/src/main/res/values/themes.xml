@@ -5,13 +5,14 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         
         <item name="textAppearanceLabelLarge">@style/MyTextAppearanceBody2</item>
+        <item name="colorOnSurface">?attr/myColor</item>
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 
     <style name="MyEarthTheme" parent="Base.Theme.MaterialYuliiaApp">
         <item name="myColor">@color/RosyBrown</item>
         <item name="colorPrimary">@color/Chocolate</item>
         <item name="colorAccent">@color/SaddleBrown</item>
-        <item name="colorOnSurface">?attr/myColor</item>
         <item name="colorSurface">@color/Sienna</item>
         <item name="colorSecondary">@color/Peru</item>
         <item name="colorPrimaryVariant">@color/DarkGoldenRod</item>
@@ -23,7 +24,6 @@
         <item name="myColor">@color/Gold</item>
         <item name="colorPrimary">@color/LemonChiffon</item>
         <item name="colorAccent">@color/PapayaWhip</item>
-        <item name="colorOnSurface">?attr/myColor</item>
         <item name="colorSurface">@color/Moccasin</item>
         <item name="colorSecondary">@color/PaleGoldenrod</item>
         <item name="colorOnSecondary">@color/Khaki</item>
@@ -35,7 +35,6 @@
         <item name="myColor">@color/IndianRed</item>
         <item name="colorPrimary">@color/LightCoral</item>
         <item name="colorAccent">@color/Salmon</item>
-        <item name="colorOnSurface">?attr/myColor</item>
         <item name="colorSurface">@color/DarkRed</item>
         <item name="colorSecondary">@color/FireBrick</item>
         <item name="colorOnSecondary">@color/Red</item>
