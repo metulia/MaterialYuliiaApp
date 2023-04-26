@@ -2,4 +2,32 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <color name="RosyBrown">#BC8F8F</color>
+    <color name="SandyBrown">#F4A460</color>
+    <color name="Goldenrod">#DAA520</color>
+    <color name="DarkGoldenRod">#B8860B</color>
+    <color name="Peru">#CD853F</color>
+    <color name="Chocolate">#D2691E</color>
+    <color name="SaddleBrown">#8B4513</color>
+    <color name="Sienna">#A0522D</color>
+    
+    <color name="IndianRed">#CD5C5C</color>
+    <color name="LightCoral">#F08080</color>
+    <color name="Salmon">#FA8072</color>
+    <color name="DarkSalmon">#E9967A</color>
+    <color name="Crimson">#DC143C</color>
+    <color name="Red">#FF0000</color>
+    <color name="FireBrick">#B22222</color>
+    <color name="DarkRed">#8B0000</color>
+    
+    <color name="Gold">#FFD700</color>
+    <color name="Yellow">#FFFF00</color>
+    <color name="LemonChiffon">#FFFACD</color>
+    <color name="PapayaWhip">#FFEFD5</color>
+    <color name="Moccasin">#FFE4B5</color>
+    <color name="PaleGoldenrod">#EEE8AA</color>
+    <color name="Khaki">#F0E68C</color>
+    <color name="DarkKhaki">#BDB76B</color>
+    
 </resources>

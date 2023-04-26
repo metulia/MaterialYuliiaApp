@@ -1,12 +1,54 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MaterialYuliiaApp" parent="Theme.Material3.DynamicColors.DayNight">
+    <style name="Base.Theme.MaterialYuliiaApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        
+        <item name="textAppearanceLabelLarge">@style/MyTextAppearanceBody2</item>
+        <item name="colorOnSurface">?attr/myColor</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
 
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    <style name="MyEarthTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="myColor">@color/RosyBrown</item>
+        <item name="colorPrimary">@color/Chocolate</item>
+        <item name="colorAccent">@color/SaddleBrown</item>
+        <item name="colorSurface">@color/Sienna</item>
+        <item name="colorSecondary">@color/Peru</item>
+        <item name="colorPrimaryVariant">@color/DarkGoldenRod</item>
+        <item name="colorTertiary">@color/Goldenrod</item>
+        <item name="colorOnPrimary">@color/SandyBrown</item>
+    </style>
+
+    <style name="MyMoonTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="myColor">@color/Gold</item>
+        <item name="colorPrimary">@color/LemonChiffon</item>
+        <item name="colorAccent">@color/PapayaWhip</item>
+        <item name="colorSurface">@color/Moccasin</item>
+        <item name="colorSecondary">@color/PaleGoldenrod</item>
+        <item name="colorOnSecondary">@color/Khaki</item>
+        <item name="colorTertiary">@color/DarkKhaki</item>
+        <item name="colorPrimaryContainer">@color/Yellow</item>
+    </style>
+
+    <style name="MyMarsTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="myColor">@color/IndianRed</item>
+        <item name="colorPrimary">@color/LightCoral</item>
+        <item name="colorAccent">@color/Salmon</item>
+        <item name="colorSurface">@color/DarkRed</item>
+        <item name="colorSecondary">@color/FireBrick</item>
+        <item name="colorOnSecondary">@color/Red</item>
+        <item name="colorTertiary">@color/Crimson</item>
+        <item name="colorPrimaryContainer">@color/DarkSalmon</item>
+    </style>
+    
+    <style name="MyTextAppearanceBody2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/cherry_swash</item>
+        <item name="android:fontFamily">@font/cherry_swash</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:letterSpacing">0.1178571429</item>
     </style>
 
     <style name="Theme.MaterialYuliiaApp" parent="Base.Theme.MaterialYuliiaApp" />
