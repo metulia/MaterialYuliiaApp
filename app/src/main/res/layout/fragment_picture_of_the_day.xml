@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PictureOfTheDayFragment">
+    tools:context=".ui.picture.PictureOfTheDayFragment">
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group"
@@ -62,7 +62,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.example.materialyuliiaapp.ui.MyImageView
+    <com.example.materialyuliiaapp.ui.picture.MyImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +75,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:fabAlignmentMode="center">
+        app:fabAlignmentMode="center"
+        app:menu="@menu/menu_main"
+        app:navigationIcon="@mipmap/ic_launcher_round">
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

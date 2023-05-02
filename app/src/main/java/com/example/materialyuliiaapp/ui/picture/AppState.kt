@@ -1,4 +1,4 @@
-package com.example.materialyuliiaapp.ui
+package com.example.materialyuliiaapp.ui.picture
 
 import com.example.materialyuliiaapp.data.PictureOfTheDayResponseData
 

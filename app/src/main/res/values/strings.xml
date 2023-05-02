@@ -16,5 +16,9 @@
     <string name="wiki_helper_text">Поищите термин в Википедии</string>
     <string name="favourite">Favourite</string>
     <string name="search">Search</string>
+    <string name="earth">EarthTheme</string>
+    <string name="moon">MoonTheme</string>
+    <string name="mars">MarsTheme</string>
+
 
 </resources>

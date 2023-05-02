@@ -1,4 +1,4 @@
-package com.example.materialyuliiaapp.ui
+package com.example.materialyuliiaapp.ui.picture
 
 import android.content.Intent
 import android.net.Uri
@@ -11,22 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
+import com.example.materialyuliiaapp.ui.MainActivity
+import com.example.materialyuliiaapp.ui.settings.SettingsFragment
 import com.google.android.material.snackbar.Snackbar
 
 class PictureOfTheDayFragment : Fragment() {
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -36,8 +35,6 @@ class PictureOfTheDayFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setHasOptionsMenu(true)
 
         viewModel.getLiveData().observe(viewLifecycleOwner) { appState ->
             renderData(appState)
@@ -63,21 +60,33 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
 
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+        setHasOptionsMenu(true)
+
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_main, menu)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
-        when (item.itemId){
+        when (item.itemId) {
             R.id.action_favourite -> {
 
             }
             R.id.action_settings -> {
-
+                requireActivity().supportFragmentManager.beginTransaction().hide(this)
+                    .add(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
+                    .commit()
+            }
+            android.R.id.home -> {
+                activity?.let {
+                    //BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
             }
         }
     }
