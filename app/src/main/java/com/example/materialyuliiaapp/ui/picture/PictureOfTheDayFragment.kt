@@ -6,13 +6,16 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialyuliiaapp.ui.MainActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
+import com.example.materialyuliiaapp.ui.viewpager.ViewPagerActivity
 import com.google.android.material.snackbar.Snackbar
 
 class PictureOfTheDayFragment : Fragment() {
@@ -61,34 +64,36 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
-        setHasOptionsMenu(true)
 
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_main, menu)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-        when (item.itemId) {
-            R.id.action_favourite -> {
-
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_main, menu)
             }
-            R.id.action_settings -> {
-                requireActivity().supportFragmentManager.beginTransaction().hide(this)
-                    .add(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
-                    .commit()
-            }
-            android.R.id.home -> {
-                activity?.let {
-                    //BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_favourite -> {
+                        activity?.let {
+                            startActivity(Intent(it, ViewPagerActivity::class.java))
+                        }
+                        true
+                    }
+                    R.id.action_settings -> {
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .add(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
+                            .commit()
+                        true
+                    }
+                    android.R.id.home -> {
+                        activity?.let {
+                            //BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                        }
+                        true
+                    }
+                    else -> false
                 }
             }
-        }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun renderData(appState: AppState) {

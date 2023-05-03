@@ -19,6 +19,8 @@
     <string name="earth">EarthTheme</string>
     <string name="moon">MoonTheme</string>
     <string name="mars">MarsTheme</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
