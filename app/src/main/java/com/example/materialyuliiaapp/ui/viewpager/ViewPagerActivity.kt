@@ -2,8 +2,10 @@ package com.example.materialyuliiaapp.ui.viewpager
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityViewPagerBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ViewPagerActivity : AppCompatActivity() {
 
@@ -16,17 +18,41 @@ class ViewPagerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.viewPager.adapter = ViewPagerAdapter(this)
-        //binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         setTabs()
     }
 
     private fun setTabs() {
-        with(binding) {
-            tabLayout.getTabAt(EARTH)?.setIcon(R.drawable.ic_earth)
-            tabLayout.getTabAt(MARS)?.setIcon(R.drawable.ic_mars)
-            tabLayout.getTabAt(WEATHER)?.setIcon(R.drawable.ic_weather)
-        }
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                EARTH -> {
+                    getString(R.string.custom_tab_earth)
+                }
+                MARS -> {
+                    getString(R.string.custom_tab_mars)
+                }
+                WEATHER -> {
+                    getString(R.string.custom_tab_weather)
+                }
+                else -> {
+                    getString(R.string.custom_tab_earth)
+                }
+            }
+            tab.icon = when (position) {
+                EARTH -> {
+                    ContextCompat.getDrawable(this, R.drawable.ic_earth)
+                }
+                MARS -> {
+                    ContextCompat.getDrawable(this, R.drawable.ic_mars)
+                }
+                WEATHER -> {
+                    ContextCompat.getDrawable(this, R.drawable.ic_weather)
+                }
+                else -> {
+                    ContextCompat.getDrawable(this, R.drawable.ic_earth)
+                }
+            }
+        }.attach()
     }
 
     companion object {
