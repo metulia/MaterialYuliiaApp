@@ -15,33 +15,10 @@ class ViewPagerActivity : AppCompatActivity() {
         binding = ActivityViewPagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.viewPager.adapter = ViewPagerAdapter(supportFragmentManager)
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
+        binding.viewPager.adapter = ViewPagerAdapter(this)
+        //binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         setTabs()
-
-        /*binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                // Nothing to do
-            }
-
-            override fun onPageSelected(position: Int) {
-               setHighlightedTab(position)
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                // Nothing to do
-            }
-        })
-    }
-
-    private fun setHighlightedTab(position:Int) {
-
-    }*/
     }
 
     private fun setTabs() {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.materialyuliiaapp.databinding.FragmentSettingsBinding
+import com.example.materialyuliiaapp.ui.MainActivity
 
 class SettingsFragment : Fragment() {
 
@@ -18,6 +19,14 @@ class SettingsFragment : Fragment() {
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.chipEarth.setOnClickListener {
+
+        }
     }
 
     override fun onDestroyView() {
