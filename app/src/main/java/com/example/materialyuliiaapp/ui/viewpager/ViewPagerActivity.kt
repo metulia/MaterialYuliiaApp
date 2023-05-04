@@ -1,7 +1,6 @@
 package com.example.materialyuliiaapp.ui.viewpager
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityViewPagerBinding
@@ -20,6 +19,29 @@ class ViewPagerActivity : AppCompatActivity() {
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         setTabs()
+
+        /*binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                // Nothing to do
+            }
+
+            override fun onPageSelected(position: Int) {
+               setHighlightedTab(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                // Nothing to do
+            }
+        })
+    }
+
+    private fun setHighlightedTab(position:Int) {
+
+    }*/
     }
 
     private fun setTabs() {

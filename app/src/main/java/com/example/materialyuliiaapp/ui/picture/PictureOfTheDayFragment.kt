@@ -79,7 +79,8 @@ class PictureOfTheDayFragment : Fragment() {
                         true
                     }
                     R.id.action_settings -> {
-                        requireActivity().supportFragmentManager.beginTransaction()
+                        (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
+                            .hide(this@PictureOfTheDayFragment)
                             .add(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
                             .commit()
                         true
