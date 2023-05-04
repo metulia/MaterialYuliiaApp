@@ -25,14 +25,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) :
     private val fragments = arrayOf(EarthFragment(), MarsFragment(), WeatherFragment())
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-            EARTH_FRAGMENT -> "EARTH"
-            MARS_FRAGMENT -> "MARS"
-            WEATHER_FRAGMENT -> "WEATHER"
-            else -> {
-                "EARTH"
-            }
-        }
+        return null
     }
 
     companion object {
