@@ -65,7 +65,7 @@ class PictureOfTheDayFragment : Fragment() {
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
 
-        requireActivity().addMenuProvider(object : MenuProvider {
+        (requireActivity() as MainActivity).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_main, menu)
             }
