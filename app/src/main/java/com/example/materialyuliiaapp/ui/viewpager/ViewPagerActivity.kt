@@ -23,14 +23,10 @@ class ViewPagerActivity : AppCompatActivity() {
     }
 
     private fun setTabs() {
-        val layoutInflater = LayoutInflater.from(this)
         with(binding) {
-            tabLayout.getTabAt(EARTH)?.customView =
-                layoutInflater.inflate(R.layout.activity_view_pager_custom_tab_earth, null)
-            tabLayout.getTabAt(MARS)?.customView =
-                layoutInflater.inflate(R.layout.activity_view_pager_custom_tab_mars, null)
-            tabLayout.getTabAt(WEATHER)?.customView =
-                layoutInflater.inflate(R.layout.activity_view_pager_custom_tab_weather, null)
+            tabLayout.getTabAt(EARTH)?.setIcon(R.drawable.ic_earth)
+            tabLayout.getTabAt(MARS)?.setIcon(R.drawable.ic_mars)
+            tabLayout.getTabAt(WEATHER)?.setIcon(R.drawable.ic_weather)
         }
     }
 
