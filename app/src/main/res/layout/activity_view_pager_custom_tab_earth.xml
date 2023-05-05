@@ -12,7 +12,7 @@
         android:drawableStart="@drawable/ic_earth"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
-        android:text="@string/custom_tab_earth"
+        android:text="@string/tab_earth"
         android:textColor="@color/Chocolate"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"

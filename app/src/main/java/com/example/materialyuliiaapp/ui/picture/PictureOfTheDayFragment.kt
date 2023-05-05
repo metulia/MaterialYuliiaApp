@@ -14,6 +14,7 @@ import coil.load
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialyuliiaapp.ui.MainActivity
+import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
 import com.example.materialyuliiaapp.ui.viewpager.ViewPagerActivity
 import com.google.android.material.snackbar.Snackbar
@@ -83,6 +84,12 @@ class PictureOfTheDayFragment : Fragment() {
                             .hide(this@PictureOfTheDayFragment)
                             .add(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
                             .commit()
+                        true
+                    }
+                    R.id.action_bottom_navigation -> {
+                        activity?.let {
+                            startActivity(Intent(it, BottomNavigationActivity::class.java))
+                        }
                         true
                     }
                     android.R.id.home -> {

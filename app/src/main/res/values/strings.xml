@@ -14,13 +14,14 @@
 
     <string name="search_wiki">Найти в Википедии</string>
     <string name="wiki_helper_text">Поищите термин в Википедии</string>
-    <string name="favourite">Favourite</string>
+    <string name="action_favourite">Favourite</string>
     <string name="search">Search</string>
     <string name="earth">EarthTheme</string>
     <string name="moon">MoonTheme</string>
     <string name="mars">MarsTheme</string>
-    <string name="custom_tab_earth">Earth</string>
-    <string name="custom_tab_mars">Mars</string>
-    <string name="custom_tab_weather">Weather</string>
+    <string name="tab_earth">Earth</string>
+    <string name="tab_mars">Mars</string>
+    <string name="tab_weather">Weather</string>
+    <string name="action_bottom_navigation">BottomNavigation</string>
 
 </resources>

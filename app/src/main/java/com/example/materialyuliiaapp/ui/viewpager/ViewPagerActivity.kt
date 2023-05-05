@@ -26,16 +26,16 @@ class ViewPagerActivity : AppCompatActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
                 EARTH -> {
-                    getString(R.string.custom_tab_earth)
+                    getString(R.string.tab_earth)
                 }
                 MARS -> {
-                    getString(R.string.custom_tab_mars)
+                    getString(R.string.tab_mars)
                 }
                 WEATHER -> {
-                    getString(R.string.custom_tab_weather)
+                    getString(R.string.tab_weather)
                 }
                 else -> {
-                    getString(R.string.custom_tab_earth)
+                    getString(R.string.tab_earth)
                 }
             }
             tab.icon = when (position) {

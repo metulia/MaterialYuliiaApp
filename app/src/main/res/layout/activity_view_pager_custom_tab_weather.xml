@@ -12,7 +12,7 @@
         android:drawableStart="@drawable/ic_weather"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
-        android:text="@string/custom_tab_weather"
+        android:text="@string/tab_weather"
         android:textColor="@color/RosyBrown"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
