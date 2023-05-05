@@ -1,10 +1,12 @@
 package com.example.materialyuliiaapp.ui.bottomnavigationview
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityBottomNavigationBinding
+import com.example.materialyuliiaapp.ui.viewpager.EarthFragment
+import com.example.materialyuliiaapp.ui.viewpager.MarsFragment
+import com.example.materialyuliiaapp.ui.viewpager.WeatherFragment
 
 class BottomNavigationActivity : AppCompatActivity() {
 
@@ -19,19 +21,26 @@ class BottomNavigationActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottom_view_earth -> {
-                    Toast.makeText(this, "Earth", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.bottom_navigation_container, EarthFragment.newInstance())
+                        .commit()
                     true
                 }
                 R.id.bottom_view_mars -> {
-                    Toast.makeText(this, "Mars", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.bottom_navigation_container, MarsFragment.newInstance())
+                        .commit()
                     true
                 }
                 R.id.bottom_view_weather -> {
-                    Toast.makeText(this, "Weather", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.bottom_navigation_container, WeatherFragment.newInstance())
+                        .commit()
                     true
                 }
                 else -> false
             }
         }
+        binding.bottomNavigationView.selectedItemId = R.id.bottom_view_earth
     }
 }
