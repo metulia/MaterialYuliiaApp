@@ -6,6 +6,7 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityMainBinding
+import com.example.materialyuliiaapp.ui.picture.PictureOfTheDayFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
-        //setTheme(R.style.MyMoonTheme)
+        setTheme(R.style.MyMoonTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

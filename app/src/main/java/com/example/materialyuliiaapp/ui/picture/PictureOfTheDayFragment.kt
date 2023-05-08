@@ -1,4 +1,4 @@
-package com.example.materialyuliiaapp.ui
+package com.example.materialyuliiaapp.ui.picture
 
 import android.content.Intent
 import android.net.Uri
@@ -6,27 +6,30 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
+import com.example.materialyuliiaapp.ui.MainActivity
+import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationActivity
+import com.example.materialyuliiaapp.ui.settings.SettingsFragment
+import com.example.materialyuliiaapp.ui.viewpager.ViewPagerActivity
 import com.google.android.material.snackbar.Snackbar
 
 class PictureOfTheDayFragment : Fragment() {
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -36,8 +39,6 @@ class PictureOfTheDayFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setHasOptionsMenu(true)
 
         viewModel.getLiveData().observe(viewLifecycleOwner) { appState ->
             renderData(appState)
@@ -63,23 +64,44 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
 
-    }
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_main, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-        when (item.itemId){
-            R.id.action_favourite -> {
-
+        (requireActivity() as MainActivity).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_main, menu)
             }
-            R.id.action_settings -> {
 
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_favourite -> {
+                        activity?.let {
+                            startActivity(Intent(it, ViewPagerActivity::class.java))
+                        }
+                        true
+                    }
+                    R.id.action_settings -> {
+                        (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
+                            .hide(this@PictureOfTheDayFragment)
+                            .add(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
+                            .commit()
+                        true
+                    }
+                    R.id.action_bottom_navigation -> {
+                        activity?.let {
+                            startActivity(Intent(it, BottomNavigationActivity::class.java))
+                        }
+                        true
+                    }
+                    android.R.id.home -> {
+                        activity?.let {
+                            //BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                        }
+                        true
+                    }
+                    else -> false
+                }
             }
-        }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun renderData(appState: AppState) {
