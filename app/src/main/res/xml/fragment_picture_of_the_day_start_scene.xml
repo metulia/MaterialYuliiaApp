@@ -5,7 +5,11 @@
     <Transition
         app:constraintSetEnd="@layout/fragment_picture_of_the_day"
         app:constraintSetStart="@layout/fragment_picture_of_the_day_start"
-        app:duration="1000" />
-    <OnClick app:targetId="@id/wiki_button" />
+        app:duration="1000">
+        <OnSwipe
+            app:dragDirection="dragLeft"
+            app:touchAnchorId="@id/wiki_button"
+            app:touchAnchorSide="right"/>
+    </Transition>
 
 </MotionScene>
