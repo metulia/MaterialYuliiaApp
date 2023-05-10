@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
-        setTheme(R.style.MyMoonTheme)
+        setTheme(R.style.MyEarthTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
