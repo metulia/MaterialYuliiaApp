@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
+import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayStartBinding
 import com.example.materialyuliiaapp.ui.MainActivity
 import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
@@ -21,14 +22,14 @@ import com.google.android.material.snackbar.Snackbar
 
 class PictureOfTheDayFragment : Fragment() {
 
-    private var _binding: FragmentPictureOfTheDayBinding? = null
+    private var _binding: FragmentPictureOfTheDayStartBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
+        _binding = FragmentPictureOfTheDayStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 

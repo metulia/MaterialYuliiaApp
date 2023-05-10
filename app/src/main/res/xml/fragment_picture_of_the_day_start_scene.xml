@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@layout/fragment_picture_of_the_day"
+        app:constraintSetStart="@layout/fragment_picture_of_the_day_start"
+        app:duration="1000" />
+    <OnClick app:targetId="@id/wiki_button" />
+
+</MotionScene>
