@@ -5,11 +5,18 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.load
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
@@ -24,6 +31,8 @@ class PictureOfTheDayFragment : Fragment() {
 
     private var _binding: FragmentPictureOfTheDayStartBinding? = null
     private val binding get() = _binding!!
+
+    private var isExpanded = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,6 +112,26 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        binding.imageView.setOnClickListener {
+
+            isExpanded = !isExpanded
+
+            val params = (it as ImageView).layoutParams
+
+            TransitionManager.beginDelayedTransition(
+                binding.root,
+                TransitionSet().addTransition(ChangeBounds()).addTransition(ChangeImageTransform())
+            )
+            if (isExpanded) {
+                params.height = CoordinatorLayout.LayoutParams.MATCH_PARENT
+                it.scaleType = ImageView.ScaleType.CENTER_CROP
+            } else {
+                params.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+            }
+            it.layoutParams = params
+        }
     }
 
     private fun renderData(appState: AppState) {
