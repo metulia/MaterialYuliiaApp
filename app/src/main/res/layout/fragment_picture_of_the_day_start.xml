@@ -14,16 +14,16 @@
             android:id="@+id/motion_layout_start"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:paddingStart="@dimen/motion_layout_paddingStart"
+            android:paddingEnd="@dimen/motion_layout_paddingEnd"
             app:layoutDescription="@xml/fragment_picture_of_the_day_start_scene">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/wiki_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="@dimen/wiki_button_marginEnd"
+                android:layout_marginBottom="@dimen/wiki_button_marginBottom"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
