@@ -6,7 +6,9 @@
         app:constraintSetEnd="@layout/fragment_picture_of_the_day_start"
         app:constraintSetStart="@layout/fragment_picture_of_the_day"
         app:duration="1000">
-        <OnClick app:targetId="@+id/bottom_app_bar" app:clickAction="transitionToEnd"/>
+        <OnSwipe
+            app:dragDirection="dragRight"
+            app:touchAnchorId="@id/input_edit_text"
+            app:touchAnchorSide="left"/>
     </Transition>
-
 </MotionScene>
