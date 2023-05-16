@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -19,7 +19,6 @@ import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import coil.load
 import com.example.materialyuliiaapp.R
-import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayStartBinding
 import com.example.materialyuliiaapp.ui.MainActivity
 import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationActivity
@@ -75,6 +74,8 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+        binding.bottomAppBar.navigationIcon =
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
 
         (requireActivity() as MainActivity).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -92,7 +93,8 @@ class PictureOfTheDayFragment : Fragment() {
                     R.id.action_settings -> {
                         (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
                             .hide(this@PictureOfTheDayFragment)
-                            .add(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
+                            .add(R.id.container, SettingsFragment().newInstance())
+                            .addToBackStack("")
                             .commit()
                         true
                     }

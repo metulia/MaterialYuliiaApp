@@ -28,7 +28,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/input_layout"
-                app:srcCompat="@drawable/ic_wiki" />
+                app:srcCompat="@drawable/ic_wikipedia" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout"
@@ -110,8 +110,7 @@
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:menu="@menu/menu_main"
-        app:navigationIcon="@drawable/ic_hamburger">
+        app:menu="@menu/menu_main">
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
