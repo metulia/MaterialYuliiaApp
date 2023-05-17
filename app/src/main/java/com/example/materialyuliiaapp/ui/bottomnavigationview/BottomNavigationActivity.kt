@@ -22,19 +22,19 @@ class BottomNavigationActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.bottom_view_earth -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.bottom_navigation_container, EarthFragment.newInstance())
+                        .replace(R.id.bottom_navigation_container, EarthFragment())
                         .commit()
                     true
                 }
                 R.id.bottom_view_mars -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.bottom_navigation_container, MarsFragment.newInstance())
+                        .replace(R.id.bottom_navigation_container, MarsFragment())
                         .commit()
                     true
                 }
                 R.id.bottom_view_weather -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.bottom_navigation_container, WeatherFragment.newInstance())
+                        .replace(R.id.bottom_navigation_container, WeatherFragment())
                         .commit()
                     true
                 }
@@ -42,5 +42,8 @@ class BottomNavigationActivity : AppCompatActivity() {
             }
         }
         binding.bottomNavigationView.selectedItemId = R.id.bottom_view_earth
+
+        val badge = binding.bottomNavigationView.getOrCreateBadge(R.id.bottom_view_earth)
+        badge.number = 222
     }
 }

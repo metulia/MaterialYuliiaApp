@@ -1,4 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_input_layout_padding">16dp</dimen>
+    <dimen name="wiki_button_marginEnd">8dp</dimen>
+    <dimen name="wiki_button_marginBottom">10dp</dimen>
+    <dimen name="motion_layout_paddingStart">10dp</dimen>
+    <dimen name="motion_layout_paddingEnd">10dp</dimen>
 </resources>

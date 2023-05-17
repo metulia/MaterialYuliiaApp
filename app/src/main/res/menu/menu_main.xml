@@ -7,7 +7,7 @@
         android:id="@+id/action_favourite"
         android:title="@string/action_favourite"
         android:icon="@drawable/ic_favourite"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_settings"
@@ -19,7 +19,7 @@
         android:id="@+id/action_bottom_navigation"
         android:title="@string/action_bottom_navigation"
         android:icon="@drawable/ic_telescope"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_search"
