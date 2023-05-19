@@ -60,14 +60,14 @@ class SettingsFragment : Fragment() {
 
     private fun getCodeTheme(): Int {
         val sharedPref = (requireActivity() as MainActivity).getSharedPreferences(
-            NAME_SHARED_PREFERENCE, AppCompatActivity.MODE_PRIVATE
+            SETTINGS_SHARED_PREFERENCE, AppCompatActivity.MODE_PRIVATE
         )
         return sharedPref.getInt(APP_THEME, MARS_THEME)
     }
 
     private fun setAppTheme(codeTheme: Int) {
         val sharedPref = (requireActivity() as MainActivity).getSharedPreferences(
-            NAME_SHARED_PREFERENCE, AppCompatActivity.MODE_PRIVATE
+            SETTINGS_SHARED_PREFERENCE, AppCompatActivity.MODE_PRIVATE
         )
         val editor = sharedPref.edit();
         editor.putInt(APP_THEME, codeTheme).apply()
@@ -97,7 +97,7 @@ class SettingsFragment : Fragment() {
 
     companion object {
 
-        const val NAME_SHARED_PREFERENCE = "Settings"
+        const val SETTINGS_SHARED_PREFERENCE = "Settings"
         const val APP_THEME = "App_theme"
         const val EARTH_THEME = 0
         const val MOON_THEME = 1

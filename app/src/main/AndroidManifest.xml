@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.MaterialYuliiaApp"
         tools:targetApi="31">
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
@@ -24,8 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.viewpager.ViewPagerActivity" />
         <activity android:name=".ui.bottomnavigationview.BottomNavigationActivity" />
+        <activity
+            android:name=".ui.recycler.RecyclerActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"

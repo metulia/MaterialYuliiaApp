@@ -23,5 +23,6 @@
     <string name="tab_mars">Mars</string>
     <string name="tab_weather">Weather</string>
     <string name="action_bottom_navigation">BottomNavigation</string>
+    <string name="recycler">Recycler</string>
 
 </resources>

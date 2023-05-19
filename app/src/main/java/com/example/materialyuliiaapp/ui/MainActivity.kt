@@ -11,9 +11,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //setTheme(R.style.MyEarthTheme)
         super.onCreate(savedInstanceState)
 
-        //setTheme(R.style.MyEarthTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
