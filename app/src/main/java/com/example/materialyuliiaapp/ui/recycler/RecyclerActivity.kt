@@ -2,6 +2,8 @@ package com.example.materialyuliiaapp.ui.recycler
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerBinding
 
 class RecyclerActivity : AppCompatActivity() {
@@ -29,5 +31,12 @@ class RecyclerActivity : AppCompatActivity() {
         )
 
         binding.recyclerView.adapter = RecyclerActivityAdapter(list)
+
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                LinearLayoutManager.VERTICAL
+            )
+        )
     }
 }

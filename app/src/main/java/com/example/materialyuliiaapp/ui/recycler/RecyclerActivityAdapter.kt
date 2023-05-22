@@ -3,21 +3,18 @@ package com.example.materialyuliiaapp.ui.recycler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTodayBinding
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTomorrowBinding
 
 class RecyclerActivityAdapter(private var list: List<NoteData>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return list[position].type
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             NoteData.TYPE_NOTE_TODAY -> {
                 val view =
@@ -37,23 +34,16 @@ class RecyclerActivityAdapter(private var list: List<NoteData>) :
         }
     }
 
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(list[position])
+    }
+
     override fun getItemCount(): Int {
         return list.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (getItemViewType(position)) {
-            NoteData.TYPE_NOTE_TODAY -> {
-                (holder as NoteTodayViewHolder).bind(list[position])
-            }
-            NoteData.TYPE_NOTE_TOMORROW -> {
-                (holder as NoteTomorrowViewHolder).bind(list[position])
-            }
-        }
-    }
-
-    inner class NoteTodayViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(listItem: NoteData) {
+    inner class NoteTodayViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bind(listItem: NoteData) {
 
             (ActivityRecyclerItemNoteTodayBinding.bind(itemView)).apply {
                 noteTodayTitle.text = listItem.noteTitle
@@ -62,8 +52,8 @@ class RecyclerActivityAdapter(private var list: List<NoteData>) :
         }
     }
 
-    inner class NoteTomorrowViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(listItem: NoteData) {
+    inner class NoteTomorrowViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bind(listItem: NoteData) {
 
             (ActivityRecyclerItemNoteTomorrowBinding.bind(itemView)).apply {
                 noteTomorrowTitle.text = listItem.noteTitle
