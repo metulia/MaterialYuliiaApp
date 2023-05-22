@@ -17,6 +17,7 @@ class RecyclerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val list = arrayListOf(
+            NoteData(NoteData.TYPE_HEADER, "HEADER"),
             NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""),
             NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""),
             NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To water flowers"),

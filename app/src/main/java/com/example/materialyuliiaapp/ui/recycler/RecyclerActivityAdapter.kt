@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemHeaderBinding
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTodayBinding
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTomorrowBinding
 
@@ -25,6 +26,11 @@ class RecyclerActivityAdapter(private var list: List<NoteData>) :
                 val view =
                     ActivityRecyclerItemNoteTomorrowBinding.inflate(LayoutInflater.from(parent.context))
                 NoteTomorrowViewHolder(view.root)
+            }
+            NoteData.TYPE_HEADER -> {
+                val view =
+                    ActivityRecyclerItemHeaderBinding.inflate(LayoutInflater.from(parent.context))
+                HeaderViewHolder(view.root)
             }
             else -> {
                 val view =
@@ -60,5 +66,14 @@ class RecyclerActivityAdapter(private var list: List<NoteData>) :
                 noteTomorrowDescription.text = listItem.noteDescription
             }
         }
+    }
+
+    inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bind(listItem: NoteData) {
+            (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
+                header.text = listItem.noteTitle
+            }
+        }
+
     }
 }

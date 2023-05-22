@@ -9,6 +9,6 @@ data class NoteData(
     companion object {
         const val TYPE_NOTE_TODAY = 1
         const val TYPE_NOTE_TOMORROW = 2
-        //const val TYPE_LATER = 3
+        const val TYPE_HEADER = 3
     }
 }
