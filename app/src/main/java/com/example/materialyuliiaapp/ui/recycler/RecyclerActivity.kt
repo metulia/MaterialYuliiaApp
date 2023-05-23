@@ -44,6 +44,10 @@ class RecyclerActivity : AppCompatActivity(), OnListItemClickListener {
                 LinearLayoutManager.VERTICAL
             )
         )
+
+        binding.recyclerActivityFAB.setOnClickListener {
+            onAddBtnClick(list.size)
+        }
     }
 
     override fun onItemClick(listItem: NoteData) {
