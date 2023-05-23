@@ -13,19 +13,19 @@ class RecyclerActivityAdapter(
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
-    private lateinit var list: List<NoteData>
+    private lateinit var list: MutableList<NoteData>
 
     fun setList(newList: List<NoteData>) {
-        this.list = newList
+        this.list = newList.toMutableList()
     }
 
     fun setAddToList(newList: List<NoteData>, position: Int) {
-        this.list = newList
+        this.list = newList.toMutableList()
         notifyItemChanged(position)
     }
 
     fun setRemoveToList(newList: List<NoteData>, position: Int) {
-        this.list = newList
+        this.list = newList.toMutableList()
         notifyItemRemoved(position)
     }
 
@@ -87,6 +87,18 @@ class RecyclerActivityAdapter(
                 }
                 removeItemImageView.setOnClickListener {
                     onListItemClickListener.onRemoveBtnClick(layoutPosition)
+                }
+                moveItemUp.setOnClickListener {
+                    list.removeAt(layoutPosition).apply {
+                        list.add(layoutPosition - 1, this)
+                    }
+                    notifyItemMoved(layoutPosition, layoutPosition - 1)
+                }
+                moveItemDown.setOnClickListener {
+                    list.removeAt(layoutPosition).apply {
+                        list.add(layoutPosition + 1, this)
+                    }
+                    notifyItemMoved(layoutPosition, layoutPosition + 1)
                 }
             }
         }
