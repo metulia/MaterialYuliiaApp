@@ -3,6 +3,7 @@ package com.example.materialyuliiaapp.ui.recycler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemHeaderBinding
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTodayBinding
@@ -104,10 +105,8 @@ class RecyclerActivityAdapter(
                     list[layoutPosition] = list[layoutPosition].let {
                         it.first to !it.second
                     }
-                    marsDescriptionTextView.visibility =
-                        if (list[layoutPosition].second) View.VISIBLE
-                        else View.GONE
-                    //notifyItemChanged(layoutPosition)
+                    marsDescriptionTextView.isVisible =
+                        list[layoutPosition].second
                 }
             }
         }
