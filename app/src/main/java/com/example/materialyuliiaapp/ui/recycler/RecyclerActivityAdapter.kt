@@ -13,24 +13,24 @@ class RecyclerActivityAdapter(
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
-    private lateinit var list: MutableList<NoteData>
+    private lateinit var list: MutableList<Pair<NoteData, Boolean>>
 
-    fun setList(newList: List<NoteData>) {
+    fun setList(newList: List<Pair<NoteData, Boolean>>) {
         this.list = newList.toMutableList()
     }
 
-    fun setAddToList(newList: List<NoteData>, position: Int) {
+    fun setAddToList(newList: List<Pair<NoteData, Boolean>>, position: Int) {
         this.list = newList.toMutableList()
         notifyItemChanged(position)
     }
 
-    fun setRemoveToList(newList: List<NoteData>, position: Int) {
+    fun setRemoveToList(newList: List<Pair<NoteData, Boolean>>, position: Int) {
         this.list = newList.toMutableList()
         notifyItemRemoved(position)
     }
 
     override fun getItemViewType(position: Int): Int {
-        return list[position].type
+        return list[position].first.type
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -67,21 +67,21 @@ class RecyclerActivityAdapter(
     }
 
     inner class NoteTodayViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(listItem: NoteData) {
+        override fun bind(listItem: Pair<NoteData, Boolean>) {
 
             (ActivityRecyclerItemNoteTodayBinding.bind(itemView)).apply {
-                noteTodayTitle.text = listItem.noteTitle
-                noteTodayDescription.text = listItem.noteDescription
+                noteTodayTitle.text = listItem.first.noteTitle
+                noteTodayDescription.text = listItem.first.noteDescription
             }
         }
     }
 
     inner class NoteTomorrowViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(listItem: NoteData) {
+        override fun bind(listItem: Pair<NoteData, Boolean>) {
 
             (ActivityRecyclerItemNoteTomorrowBinding.bind(itemView)).apply {
-                noteTomorrowTitle.text = listItem.noteTitle
-                noteTomorrowDescription.text = listItem.noteDescription
+                noteTomorrowTitle.text = listItem.first.noteTitle
+                noteTomorrowDescription.text = listItem.first.noteDescription
                 addItemImageView.setOnClickListener {
                     onListItemClickListener.onAddBtnClick(layoutPosition)
                 }
@@ -100,14 +100,23 @@ class RecyclerActivityAdapter(
                     }
                     notifyItemMoved(layoutPosition, layoutPosition + 1)
                 }
+                noteTomorrowImageView.setOnClickListener {
+                    list[layoutPosition] = list[layoutPosition].let {
+                        it.first to !it.second
+                    }
+                    marsDescriptionTextView.visibility =
+                        if (list[layoutPosition].second) View.VISIBLE
+                        else View.GONE
+                    //notifyItemChanged(layoutPosition)
+                }
             }
         }
     }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(listItem: NoteData) {
+        override fun bind(listItem: Pair<NoteData, Boolean>) {
             (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
-                header.text = listItem.noteTitle
+                header.text = listItem.first.noteTitle
             }
         }
 

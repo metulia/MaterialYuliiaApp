@@ -14,6 +14,19 @@
         app:srcCompat="@drawable/ic_mars" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mars_description_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/mars_description"
+        android:textColor="#000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note_tomorrow_image_view" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/note_tomorrow_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -12,18 +12,18 @@ class RecyclerActivity : AppCompatActivity(), OnListItemClickListener {
     private lateinit var adapter: RecyclerActivityAdapter
 
     private val list = arrayListOf(
-        NoteData(NoteData.TYPE_HEADER, "HEADER"),
-        NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""),
-        NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", "To make supper"),
-        NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To water flowers"),
-        NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", "To make dinner"),
-        NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To clean my room"),
-        NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""),
-        NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""),
-        NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To make homework"),
-        NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""),
-        NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", ""),
-        NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To make homework"),
+        Pair(NoteData(NoteData.TYPE_HEADER, "HEADER"), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", "To make supper"), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To water flowers"), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", "To make dinner"), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To clean my room"), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To make homework"), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TODAY, "For Today", ""), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", ""), false),
+        Pair(NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "To make homework"), false)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +57,7 @@ class RecyclerActivity : AppCompatActivity(), OnListItemClickListener {
     override fun onAddBtnClick(position: Int) {
         list.add(
             position,
-            NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", "")
+            Pair(NoteData(NoteData.TYPE_NOTE_TOMORROW, "For Tomorrow", ""), false)
         )
         adapter.setAddToList(list, position)
     }
