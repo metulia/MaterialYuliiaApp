@@ -111,6 +111,7 @@
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
+        app:navigationIcon="@drawable/ic_hamburger"
         app:menu="@menu/menu_main">
 
     </com.google.android.material.bottomappbar.BottomAppBar>

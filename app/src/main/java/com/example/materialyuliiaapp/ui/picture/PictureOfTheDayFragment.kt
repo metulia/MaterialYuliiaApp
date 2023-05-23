@@ -22,6 +22,7 @@ import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayStartBinding
 import com.example.materialyuliiaapp.ui.MainActivity
 import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationActivity
+import com.example.materialyuliiaapp.ui.recycler.RecyclerActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
 import com.example.materialyuliiaapp.ui.viewpager.ViewPagerActivity
 import com.google.android.material.snackbar.Snackbar
@@ -101,6 +102,12 @@ class PictureOfTheDayFragment : Fragment() {
                     R.id.action_bottom_navigation -> {
                         activity?.let {
                             startActivity(Intent(it, BottomNavigationActivity::class.java))
+                        }
+                        true
+                    }
+                    R.id.action_recycler -> {
+                        activity?.let {
+                            startActivity(Intent(it, RecyclerActivity::class.java))
                         }
                         true
                     }
