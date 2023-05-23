@@ -8,8 +8,26 @@ import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemHeaderBindi
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTodayBinding
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTomorrowBinding
 
-class RecyclerActivityAdapter(private var list: List<NoteData>) :
+class RecyclerActivityAdapter(
+    private var onListItemClickListener: OnListItemClickListener
+) :
     RecyclerView.Adapter<BaseViewHolder>() {
+
+    private lateinit var list: List<NoteData>
+
+    fun setList(newList: List<NoteData>) {
+        this.list = newList
+    }
+
+    fun setAddToList(newList: List<NoteData>, position: Int) {
+        this.list = newList
+        notifyItemChanged(position)
+    }
+
+    fun setRemoveToList(newList: List<NoteData>, position: Int) {
+        this.list = newList
+        notifyItemRemoved(position)
+    }
 
     override fun getItemViewType(position: Int): Int {
         return list[position].type
@@ -64,6 +82,12 @@ class RecyclerActivityAdapter(private var list: List<NoteData>) :
             (ActivityRecyclerItemNoteTomorrowBinding.bind(itemView)).apply {
                 noteTomorrowTitle.text = listItem.noteTitle
                 noteTomorrowDescription.text = listItem.noteDescription
+                addItemImageView.setOnClickListener {
+                    onListItemClickListener.onAddBtnClick(layoutPosition)
+                }
+                removeItemImageView.setOnClickListener {
+                    onListItemClickListener.onRemoveBtnClick(layoutPosition)
+                }
             }
         }
     }
