@@ -22,7 +22,7 @@ class RecyclerActivityAdapter(
 
     fun setAddToList(newList: List<Pair<NoteData, Boolean>>, position: Int) {
         this.list = newList.toMutableList()
-        notifyItemChanged(position)
+        notifyItemInserted(position)
     }
 
     fun setRemoveToList(newList: List<Pair<NoteData, Boolean>>, position: Int) {
@@ -71,7 +71,9 @@ class RecyclerActivityAdapter(
         override fun bind(listItem: Pair<NoteData, Boolean>) {
 
             (ActivityRecyclerItemNoteTodayBinding.bind(itemView)).apply {
+
                 noteTodayTitle.text = listItem.first.noteTitle
+
                 noteTodayDescription.text = listItem.first.noteDescription
             }
         }
@@ -81,26 +83,40 @@ class RecyclerActivityAdapter(
         override fun bind(listItem: Pair<NoteData, Boolean>) {
 
             (ActivityRecyclerItemNoteTomorrowBinding.bind(itemView)).apply {
+
                 noteTomorrowTitle.text = listItem.first.noteTitle
+
                 noteTomorrowDescription.text = listItem.first.noteDescription
+
                 addItemImageView.setOnClickListener {
                     onListItemClickListener.onAddBtnClick(layoutPosition)
                 }
+
                 removeItemImageView.setOnClickListener {
                     onListItemClickListener.onRemoveBtnClick(layoutPosition)
                 }
+
                 moveItemUp.setOnClickListener {
-                    list.removeAt(layoutPosition).apply {
-                        list.add(layoutPosition - 1, this)
+
+                    layoutPosition.takeIf { it > 1 }?.also {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition - 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition - 1)
                     }
-                    notifyItemMoved(layoutPosition, layoutPosition - 1)
                 }
+
                 moveItemDown.setOnClickListener {
-                    list.removeAt(layoutPosition).apply {
-                        list.add(layoutPosition + 1, this)
+
+                    layoutPosition.takeIf { it < list.size - 1 }?.also {
+
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition + 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition + 1)
                     }
-                    notifyItemMoved(layoutPosition, layoutPosition + 1)
                 }
+
                 noteTomorrowImageView.setOnClickListener {
                     list[layoutPosition] = list[layoutPosition].let {
                         it.first to !it.second
@@ -118,6 +134,5 @@ class RecyclerActivityAdapter(
                 header.text = listItem.first.noteTitle
             }
         }
-
     }
 }
