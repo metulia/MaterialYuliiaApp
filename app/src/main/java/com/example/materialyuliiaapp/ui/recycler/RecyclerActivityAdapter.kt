@@ -1,5 +1,6 @@
 package com.example.materialyuliiaapp.ui.recycler
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTomorro
 class RecyclerActivityAdapter(
     private var onListItemClickListener: OnListItemClickListener
 ) :
-    RecyclerView.Adapter<BaseViewHolder>() {
+    RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
     private lateinit var list: MutableList<Pair<NoteData, Boolean>>
 
@@ -77,6 +78,14 @@ class RecyclerActivityAdapter(
                 noteTodayDescription.text = listItem.first.noteDescription
             }
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
     }
 
     inner class NoteTomorrowViewHolder(view: View) : BaseViewHolder(view) {
@@ -126,6 +135,14 @@ class RecyclerActivityAdapter(
                 }
             }
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
     }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
@@ -134,5 +151,29 @@ class RecyclerActivityAdapter(
                 header.text = listItem.first.noteTitle
             }
         }
+
+        override fun onItemSelected() {
+
+        }
+
+        override fun onItemClear() {
+
+        }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+
+        toPosition.takeIf { it > 1 }?.also {
+            list.removeAt(fromPosition).apply {
+                list.add(toPosition, this)
+            }
+            notifyItemMoved(fromPosition, toPosition)
+        }
+    }
+
+    override fun onItemDismiss(position: Int) {
+
+        list.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

@@ -3,6 +3,7 @@ package com.example.materialyuliiaapp.ui.recycler
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerBinding
 
@@ -48,6 +49,8 @@ class RecyclerActivity : AppCompatActivity(), OnListItemClickListener {
         binding.recyclerActivityFAB.setOnClickListener {
             onAddBtnClick(list.size)
         }
+
+        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView((binding.recyclerView))
     }
 
     override fun onItemClick(listItem: NoteData) {
