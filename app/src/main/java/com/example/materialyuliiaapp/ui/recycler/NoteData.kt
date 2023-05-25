@@ -1,6 +1,7 @@
 package com.example.materialyuliiaapp.ui.recycler
 
 data class NoteData(
+    val id: Int = 0,
     val type: Int,
     val noteTitle: String = "Text",
     val noteDescription: String? = "SomeDescription"

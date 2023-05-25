@@ -4,20 +4,25 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemHeaderBinding
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTodayBinding
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerItemNoteTomorrowBinding
 
-class RecyclerActivityAdapter(
+class RecyclerActivityAdapter(private var list: MutableList<Pair<NoteData, Boolean>>,
     private var onListItemClickListener: OnListItemClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
-    private lateinit var list: MutableList<Pair<NoteData, Boolean>>
-
     fun setList(newList: List<Pair<NoteData, Boolean>>) {
+
+        val result = DiffUtil.calculateDiff(DiffUtilCallback(list, newList))
+        result.dispatchUpdatesTo(this)
+
         this.list = newList.toMutableList()
     }
 
@@ -62,6 +67,30 @@ class RecyclerActivityAdapter(
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.bind(list[position])
+    }
+
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            when (getItemViewType(position)) {
+                NoteData.TYPE_NOTE_TOMORROW -> {
+                    val res =
+                        createCombinedPayload(payloads as List<Change<Pair<NoteData, Boolean>>>)
+                    val oldData = res.oldData
+                    val newData = res.newData
+
+                    if (newData.first.noteTitle != oldData.first.noteTitle) {
+                        (holder as NoteTomorrowViewHolder).itemView.findViewById<TextView>(R.id.note_tomorrow_title).text =
+                            newData.first.noteTitle
+                    }
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
