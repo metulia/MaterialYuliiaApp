@@ -163,7 +163,7 @@ class RecyclerActivityAdapter(
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
 
-        toPosition.takeIf { it > 1 }?.also {
+        toPosition.takeIf { it > 0 && it < list.size }?.also {
             list.removeAt(fromPosition).apply {
                 list.add(toPosition, this)
             }
