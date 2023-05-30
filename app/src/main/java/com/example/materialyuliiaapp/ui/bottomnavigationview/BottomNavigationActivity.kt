@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityBottomNavigationBinding
+import com.example.materialyuliiaapp.ui.marsphoto.MarsFragment
 import com.example.materialyuliiaapp.ui.viewpager.EarthFragment
-import com.example.materialyuliiaapp.ui.viewpager.MarsFragment
 import com.example.materialyuliiaapp.ui.viewpager.WeatherFragment
 
 class BottomNavigationActivity : AppCompatActivity() {
