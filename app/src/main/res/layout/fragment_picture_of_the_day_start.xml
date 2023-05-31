@@ -108,6 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
+        app:navigationIcon="@drawable/ic_hamburger"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
         app:menu="@menu/menu_main">

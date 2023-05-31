@@ -21,6 +21,7 @@ import coil.load
 import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayStartBinding
 import com.example.materialyuliiaapp.ui.MainActivity
+import com.example.materialyuliiaapp.ui.bottomnavigationdrawer.BottomNavigationDrawerFragment
 import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationActivity
 import com.example.materialyuliiaapp.ui.recycler.RecyclerActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
@@ -114,7 +115,7 @@ class PictureOfTheDayFragment : Fragment() {
                     }
                     android.R.id.home -> {
                         activity?.let {
-                            //BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                            BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
                         }
                         true
                     }
@@ -144,7 +145,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.bottomSheetContainer)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
@@ -158,6 +159,7 @@ class PictureOfTheDayFragment : Fragment() {
                     BottomSheetBehavior.STATE_SETTLING -> {}
                 }
             }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
             }
