@@ -25,6 +25,7 @@ import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationAct
 import com.example.materialyuliiaapp.ui.recycler.RecyclerActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
 import com.example.materialyuliiaapp.ui.viewpager.ViewPagerActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 
 class PictureOfTheDayFragment : Fragment() {
@@ -141,6 +142,27 @@ class PictureOfTheDayFragment : Fragment() {
             }
             it.layoutParams = params
         }
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.bottomSheetContainer)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_DRAGGING -> {}
+                    BottomSheetBehavior.STATE_COLLAPSED -> {}
+                    BottomSheetBehavior.STATE_EXPANDED -> {}
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {}
+                    BottomSheetBehavior.STATE_HIDDEN -> {}
+                    BottomSheetBehavior.STATE_SETTLING -> {}
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+        })
+
     }
 
     private fun renderData(appState: AppState) {
@@ -156,7 +178,15 @@ class PictureOfTheDayFragment : Fragment() {
                 Snackbar.make(binding.imageView, "Loading image", Snackbar.LENGTH_LONG).show()
             }
             is AppState.Success -> {
-                binding.imageView.load(appState.pictureOfTheDayResponseData.url)
+                with(binding) {
+                    imageView.load(appState.pictureOfTheDayResponseData.url)
+
+                    bottomSheet.bottomSheetExplanationTitle.text =
+                        appState.pictureOfTheDayResponseData.title
+
+                    bottomSheet.bottomSheetExplanation.text =
+                        appState.pictureOfTheDayResponseData.explanation
+                }
             }
         }
     }

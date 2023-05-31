@@ -120,4 +120,6 @@
         android:layout_height="wrap_content"
         app:layout_anchor="@id/bottom_app_bar" />
 
+    <include android:id="@+id/bottom_sheet" layout="@layout/bottom_sheet_layout"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
