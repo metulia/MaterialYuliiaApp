@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentMarsBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -49,7 +50,12 @@ class MarsFragment : Fragment() {
             }
             is MarsAppState.Success -> {
                 val url = appState.marsPhotoResponseData.photos.first().imgSrc
-                binding.marsImageView.load(url)
+                binding.marsImageView.load(url) {
+                    lifecycle(this@MarsFragment)
+                    error(R.drawable.ic_load_error_vector)
+                    placeholder(R.drawable.ic_no_photo_vector)
+                    crossfade(true)
+                }
             }
         }
     }

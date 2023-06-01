@@ -26,6 +26,7 @@ import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationAct
 import com.example.materialyuliiaapp.ui.recycler.RecyclerActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
 import com.example.materialyuliiaapp.ui.viewpager.ViewPagerActivity
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 
@@ -35,6 +36,8 @@ class PictureOfTheDayFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var isExpanded = false
+
+    private var isMain = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,11 +63,9 @@ class PictureOfTheDayFragment : Fragment() {
         binding.chipToday.setOnClickListener {
             viewModel.sendRequest()
         }
-
         binding.chipYesterday.setOnClickListener {
             viewModel.sendRequestByDateYesterday()
         }
-
         binding.chipTheDayBeforeYesterday.setOnClickListener {
             viewModel.sendRequestByDateBeforeYesterday()
         }
@@ -165,6 +166,20 @@ class PictureOfTheDayFragment : Fragment() {
             }
         })
 
+        binding.exFab.setOnClickListener {
+            if (isMain) {
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_navigation_drawer_other_screen)
+            } else {
+                binding.bottomAppBar.navigationIcon =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                binding.bottomAppBar.replaceMenu(R.menu.menu_main)
+            }
+            isMain = !isMain
+        }
+
     }
 
     private fun renderData(appState: AppState) {
@@ -181,7 +196,12 @@ class PictureOfTheDayFragment : Fragment() {
             }
             is AppState.Success -> {
                 with(binding) {
-                    imageView.load(appState.pictureOfTheDayResponseData.url)
+                    imageView.load(appState.pictureOfTheDayResponseData.url) {
+                        lifecycle(this@PictureOfTheDayFragment)
+                        error(R.drawable.ic_load_error_vector)
+                        placeholder(R.drawable.ic_no_photo_vector)
+                        crossfade(true)
+                    }
 
                     bottomSheet.bottomSheetExplanationTitle.text =
                         appState.pictureOfTheDayResponseData.title
