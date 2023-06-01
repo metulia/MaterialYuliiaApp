@@ -203,6 +203,8 @@ class PictureOfTheDayFragment : Fragment() {
                         crossfade(true)
                     }
 
+                    explanationTextView.text = appState.pictureOfTheDayResponseData.explanation
+
                     bottomSheet.bottomSheetExplanationTitle.text =
                         appState.pictureOfTheDayResponseData.title
 
