@@ -4,8 +4,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.SpannedString
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.view.*
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -203,7 +210,30 @@ class PictureOfTheDayFragment : Fragment() {
                         crossfade(true)
                     }
 
-                    explanationTextView.text = appState.pictureOfTheDayResponseData.explanation
+                    if (appState.pictureOfTheDayResponseData.explanation.isEmpty()) {
+                        Snackbar.make(
+                            binding.explanationTextView,
+                            "Explanation is empty",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    } else {
+                        var spannableStringBuilder =
+                            SpannableStringBuilder(appState.pictureOfTheDayResponseData.explanation)
+
+                        explanationTextView.setText(
+                            spannableStringBuilder,
+                            TextView.BufferType.EDITABLE
+                        )
+
+                        spannableStringBuilder = explanationTextView.text as SpannableStringBuilder
+
+                        spannableStringBuilder.setSpan(
+                            RelativeSizeSpan(2f),
+                            0,
+                            spannableStringBuilder.length,
+                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+                    }
 
                     bottomSheet.bottomSheetExplanationTitle.text =
                         appState.pictureOfTheDayResponseData.title
