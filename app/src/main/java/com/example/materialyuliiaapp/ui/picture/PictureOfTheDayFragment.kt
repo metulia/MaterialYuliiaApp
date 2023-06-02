@@ -5,6 +5,8 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.*
@@ -14,6 +16,8 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.provider.FontRequest
+import androidx.core.provider.FontsContractCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -281,13 +285,6 @@ class PictureOfTheDayFragment : Fragment() {
                         )
 
                         spannableStringBuilder.setSpan(
-                            StyleSpan(Typeface.BOLD),
-                            0,
-                            spannableStringBuilder.length,
-                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
                             UnderlineSpan(),
                             200,
                             250,
@@ -313,6 +310,33 @@ class PictureOfTheDayFragment : Fragment() {
                             300,
                             spannableStringBuilder.length,
                             Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+
+                        val request = FontRequest(
+                            "com.google.android.gms.fonts",
+                            "com.google.android.gms",
+                            "Roboto Slab",
+                            R.array.com_google_android_gms_fonts_certs
+                        )
+
+                        FontsContractCompat.requestFont(
+                            requireContext(),
+                            request,
+                            object : FontsContractCompat.FontRequestCallback() {
+                                override fun onTypefaceRetrieved(typeface: Typeface?) {
+                                    typeface?.let {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                            spannableStringBuilder.setSpan(
+                                                TypefaceSpan(it),
+                                                0,
+                                                spannableStringBuilder.length,
+                                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                            )
+                                        }
+                                    }
+                                }
+                            },
+                            Handler(Looper.getMainLooper())
                         )
                     }
 
