@@ -31,10 +31,8 @@ import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.FragmentPictureOfTheDayStartBinding
 import com.example.materialyuliiaapp.ui.MainActivity
 import com.example.materialyuliiaapp.ui.bottomnavigationdrawer.BottomNavigationDrawerFragment
-import com.example.materialyuliiaapp.ui.bottomnavigationview.BottomNavigationActivity
 import com.example.materialyuliiaapp.ui.recycler.RecyclerActivity
 import com.example.materialyuliiaapp.ui.settings.SettingsFragment
-import com.example.materialyuliiaapp.ui.viewpager.ViewPagerActivity
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
@@ -67,128 +65,22 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getLiveData().observe(viewLifecycleOwner) { appState ->
             renderData(appState)
         }
+
         viewModel.sendRequest()
 
-        binding.chipToday.setOnClickListener {
-            viewModel.sendRequest()
-        }
-        binding.chipYesterday.setOnClickListener {
-            viewModel.sendRequestByDateYesterday()
-        }
-        binding.chipTheDayBeforeYesterday.setOnClickListener {
-            viewModel.sendRequestByDateBeforeYesterday()
-        }
+        initChipGroup()
 
-        binding.inputLayout.setEndIconOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data =
-                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
-            })
-        }
+        initWikiSearch()
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
-        binding.bottomAppBar.navigationIcon =
-            ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
+        setBottomAppBar()
 
-        (requireActivity() as MainActivity).addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_main, menu)
-            }
+        addBottomAppBarMenu()
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.action_favourite -> {
-                        activity?.let {
-                            startActivity(Intent(it, ViewPagerActivity::class.java))
-                        }
-                        true
-                    }
-                    R.id.action_settings -> {
-                        (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
-                            .hide(this@PictureOfTheDayFragment)
-                            .add(R.id.container, SettingsFragment().newInstance())
-                            .addToBackStack("")
-                            .commit()
-                        true
-                    }
-                    R.id.action_bottom_navigation -> {
-                        activity?.let {
-                            startActivity(Intent(it, BottomNavigationActivity::class.java))
-                        }
-                        true
-                    }
-                    R.id.action_recycler -> {
-                        activity?.let {
-                            startActivity(Intent(it, RecyclerActivity::class.java))
-                        }
-                        true
-                    }
-                    android.R.id.home -> {
-                        activity?.let {
-                            BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                        }
-                        true
-                    }
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        expandImageView()
 
-        binding.imageView.setOnClickListener {
+        initBottomSheet()
 
-            isExpanded = !isExpanded
-
-            val params = (it as ImageView).layoutParams
-
-            TransitionManager.beginDelayedTransition(
-                binding.root,
-                TransitionSet().addTransition(ChangeBounds()).addTransition(ChangeImageTransform())
-            )
-            if (isExpanded) {
-                params.height = CoordinatorLayout.LayoutParams.MATCH_PARENT
-                it.scaleType = ImageView.ScaleType.CENTER_CROP
-            } else {
-                params.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
-                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
-            }
-            it.layoutParams = params
-        }
-
-        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.bottomSheetContainer)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_DRAGGING -> {}
-                    BottomSheetBehavior.STATE_COLLAPSED -> {}
-                    BottomSheetBehavior.STATE_EXPANDED -> {}
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {}
-                    BottomSheetBehavior.STATE_HIDDEN -> {}
-                    BottomSheetBehavior.STATE_SETTLING -> {}
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
-        })
-
-        binding.exFab.setOnClickListener {
-            if (isMain) {
-                binding.bottomAppBar.navigationIcon = null
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_navigation_drawer_other_screen)
-            } else {
-                binding.bottomAppBar.navigationIcon =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.bottomAppBar.replaceMenu(R.menu.menu_main)
-            }
-            isMain = !isMain
-        }
-
+        initFab()
     }
 
     private fun renderData(appState: AppState) {
@@ -214,7 +106,7 @@ class PictureOfTheDayFragment : Fragment() {
 
                     if (appState.pictureOfTheDayResponseData.explanation.isEmpty()) {
                         Snackbar.make(
-                            binding.explanationTextView,
+                            explanationTextView,
                             "Explanation is empty",
                             Snackbar.LENGTH_LONG
                         ).show()
@@ -229,88 +121,7 @@ class PictureOfTheDayFragment : Fragment() {
 
                         spannableStringBuilder = explanationTextView.text as SpannableStringBuilder
 
-                        spannableStringBuilder.setSpan(
-                            RelativeSizeSpan(1.5f),
-                            0,
-                            spannableStringBuilder.length,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
-                            ForegroundColorSpan(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.DarkSalmon
-                                )
-                            ),
-                            0,
-                            50,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
-                            ForegroundColorSpan(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.FireBrick
-                                )
-                            ),
-                            50,
-                            100,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
-                            ForegroundColorSpan(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.DarkKhaki
-                                )
-                            ),
-                            100,
-                            150,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
-                            ForegroundColorSpan(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.DarkGoldenRod
-                                )
-                            ),
-                            150,
-                            200,
-                            Spannable.SPAN_INCLUSIVE_INCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
-                            UnderlineSpan(),
-                            200,
-                            250,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
-                            BackgroundColorSpan(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.Salmon
-                                )
-                            ), 250, 300, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
-
-                        spannableStringBuilder.setSpan(
-                            BackgroundColorSpan(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.Khaki
-                                )
-                            ),
-                            300,
-                            spannableStringBuilder.length,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
+                        setSpans(spannableStringBuilder)
 
                         val request = FontRequest(
                             "com.google.android.gms.fonts",
@@ -324,8 +135,8 @@ class PictureOfTheDayFragment : Fragment() {
                             request,
                             object : FontsContractCompat.FontRequestCallback() {
                                 override fun onTypefaceRetrieved(typeface: Typeface?) {
-                                    typeface?.let {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                        typeface?.let {
                                             spannableStringBuilder.setSpan(
                                                 TypefaceSpan(it),
                                                 0,
@@ -333,6 +144,8 @@ class PictureOfTheDayFragment : Fragment() {
                                                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                                             )
                                         }
+                                    } else {
+                                        explanationTextView.typeface = typeface
                                     }
                                 }
                             },
@@ -348,6 +161,224 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun initChipGroup() {
+        binding.chipToday.setOnClickListener {
+            viewModel.sendRequest()
+        }
+        binding.chipYesterday.setOnClickListener {
+            viewModel.sendRequestByDateYesterday()
+        }
+        binding.chipTheDayBeforeYesterday.setOnClickListener {
+            viewModel.sendRequestByDateBeforeYesterday()
+        }
+    }
+
+    private fun initWikiSearch() {
+
+        binding.inputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+            })
+        }
+    }
+
+    private fun setBottomAppBar() {
+
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+
+        binding.bottomAppBar.navigationIcon =
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
+    }
+
+    private fun addBottomAppBarMenu() {
+
+        (requireActivity() as MainActivity).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_main, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+
+                    R.id.action_favourite -> {
+                        activity?.let {
+                            startActivity(Intent(it, RecyclerActivity::class.java))
+                        }
+                        true
+                    }
+
+                    R.id.action_settings -> {
+                        (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
+                            .hide(this@PictureOfTheDayFragment)
+                            .add(R.id.container, SettingsFragment().newInstance())
+                            .addToBackStack("")
+                            .commit()
+                        true
+                    }
+
+                    android.R.id.home -> {
+                        activity?.let {
+                            BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun expandImageView() {
+
+        binding.imageView.setOnClickListener {
+
+            isExpanded = !isExpanded
+
+            val params = (it as ImageView).layoutParams
+
+            TransitionManager.beginDelayedTransition(
+                binding.root,
+                TransitionSet().addTransition(ChangeBounds()).addTransition(ChangeImageTransform())
+            )
+            if (isExpanded) {
+                params.height = CoordinatorLayout.LayoutParams.MATCH_PARENT
+                it.scaleType = ImageView.ScaleType.CENTER_CROP
+            } else {
+                params.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+            }
+            it.layoutParams = params
+        }
+    }
+
+    private fun initBottomSheet() {
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.bottomSheetContainer)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_DRAGGING -> {}
+                    BottomSheetBehavior.STATE_COLLAPSED -> {}
+                    BottomSheetBehavior.STATE_EXPANDED -> {}
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {}
+                    BottomSheetBehavior.STATE_HIDDEN -> {}
+                    BottomSheetBehavior.STATE_SETTLING -> {}
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
+    }
+
+    private fun initFab() {
+
+        binding.fab.setOnClickListener {
+            if (isMain) {
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_navigation_drawer_other_screen)
+            } else {
+                binding.bottomAppBar.navigationIcon =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                binding.bottomAppBar.replaceMenu(R.menu.menu_main)
+            }
+            isMain = !isMain
+        }
+    }
+
+    private fun setSpans(spannableStringBuilder: SpannableStringBuilder) {
+
+        spannableStringBuilder.setSpan(
+            RelativeSizeSpan(1.5f),
+            0,
+            spannableStringBuilder.length,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+
+        spannableStringBuilder.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.DarkSalmon
+                )
+            ),
+            0,
+            50,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+
+        spannableStringBuilder.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.FireBrick
+                )
+            ),
+            50,
+            100,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+
+        spannableStringBuilder.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.DarkKhaki
+                )
+            ),
+            100,
+            150,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+
+        spannableStringBuilder.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.DarkGoldenRod
+                )
+            ),
+            150,
+            200,
+            Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+
+        spannableStringBuilder.setSpan(
+            UnderlineSpan(),
+            200,
+            250,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+
+        spannableStringBuilder.setSpan(
+            BackgroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.Salmon
+                )
+            ), 250, 300, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+
+        spannableStringBuilder.setSpan(
+            BackgroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.Khaki
+                )
+            ),
+            300,
+            spannableStringBuilder.length,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
     }
 
     override fun onDestroyView() {

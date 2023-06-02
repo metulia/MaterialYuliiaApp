@@ -15,14 +15,4 @@
         android:icon="@drawable/ic_settings"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/action_bottom_navigation"
-        android:title="@string/action_bottom_navigation"
-        android:icon="@drawable/ic_telescope"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/action_recycler"
-        android:title="@string/recycler"
-        app:showAsAction="ifRoom" />
 </menu>
