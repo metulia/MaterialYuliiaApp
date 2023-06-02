@@ -1,15 +1,13 @@
 package com.example.materialyuliiaapp.ui.picture
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.SpannedString
-import android.text.style.BackgroundColorSpan
-import android.text.style.ForegroundColorSpan
-import android.text.style.RelativeSizeSpan
+import android.text.style.*
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
@@ -228,8 +226,91 @@ class PictureOfTheDayFragment : Fragment() {
                         spannableStringBuilder = explanationTextView.text as SpannableStringBuilder
 
                         spannableStringBuilder.setSpan(
-                            RelativeSizeSpan(2f),
+                            RelativeSizeSpan(1.5f),
                             0,
+                            spannableStringBuilder.length,
+                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            ForegroundColorSpan(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.DarkSalmon
+                                )
+                            ),
+                            0,
+                            50,
+                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            ForegroundColorSpan(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.FireBrick
+                                )
+                            ),
+                            50,
+                            100,
+                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            ForegroundColorSpan(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.DarkKhaki
+                                )
+                            ),
+                            100,
+                            150,
+                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            ForegroundColorSpan(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.DarkGoldenRod
+                                )
+                            ),
+                            150,
+                            200,
+                            Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            StyleSpan(Typeface.BOLD),
+                            0,
+                            spannableStringBuilder.length,
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            UnderlineSpan(),
+                            200,
+                            250,
+                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            BackgroundColorSpan(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.Salmon
+                                )
+                            ), 250, 300, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
+
+                        spannableStringBuilder.setSpan(
+                            BackgroundColorSpan(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.Khaki
+                                )
+                            ),
+                            300,
                             spannableStringBuilder.length,
                             Spannable.SPAN_EXCLUSIVE_INCLUSIVE
                         )
