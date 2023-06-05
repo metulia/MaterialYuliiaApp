@@ -11,7 +11,6 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/motion_layout_start"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="@dimen/motion_layout_paddingStart"
@@ -35,13 +34,13 @@
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/search_wiki"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:endIconCheckable="true"
                 app:endIconDrawable="@drawable/ic_wiki"
                 app:endIconMode="custom"
                 app:helperText="@string/wiki_helper_text"
-                android:hint="@string/search_wiki"
                 app:layout_constraintBottom_toTopOf="@+id/chip_group"
                 app:layout_constraintStart_toEndOf="parent">
 
@@ -56,9 +55,9 @@
                 android:id="@+id/chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_layout"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
@@ -95,9 +94,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:scaleType="centerInside"
                 android:contentDescription="@string/photo_of_the_day"
+                android:scaleType="centerInside"
                 app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/explanation_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_view"
+                tools:text="@string/mars_description" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.core.widget.NestedScrollView>
@@ -108,16 +116,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
+        app:navigationIcon="@drawable/ic_hamburger"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:menu="@menu/menu_main">
+        app:menu="@menu/menu_main"
+        app:menuAlignmentMode="auto">
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/ex_fab"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/bottom_app_bar" />
+
+    <include android:id="@+id/bottom_sheet" layout="@layout/bottom_sheet_layout"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

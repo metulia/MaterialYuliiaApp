@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.viewpager.MarsFragment">
+    tools:context=".ui.marsphoto.MarsFragment">
 
-    <ImageView
+    <com.example.materialyuliiaapp.ui.picture.MyImageView
+        android:id="@+id/mars_image_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_mars" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
