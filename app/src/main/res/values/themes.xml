@@ -56,8 +56,12 @@
         <item name="android:fontFamily">@font/cherry_swash</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:letterSpacing">0.1178571429</item>
+    </style>
+
+    <style name="SplashTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="Theme.MaterialYuliiaApp" parent="Base.Theme.MaterialYuliiaApp" />
