@@ -13,6 +13,7 @@ class BottomNavigationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBottomNavigationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.MyMoonTheme)
         super.onCreate(savedInstanceState)
 
         binding = ActivityBottomNavigationBinding.inflate(layoutInflater)
