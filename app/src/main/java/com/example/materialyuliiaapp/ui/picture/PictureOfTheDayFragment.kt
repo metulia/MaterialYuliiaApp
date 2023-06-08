@@ -282,14 +282,30 @@ class PictureOfTheDayFragment : Fragment() {
 
         binding.fab.setOnClickListener {
             if (isMain) {
-                binding.bottomAppBar.navigationIcon = null
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_navigation_drawer_other_screen)
+                with(binding) {
+                    bottomAppBar.navigationIcon = null
+                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                    fab.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_back_fab
+                        )
+                    )
+                    bottomAppBar.replaceMenu(R.menu.menu_bottom_navigation_drawer_other_screen)
+                }
             } else {
-                binding.bottomAppBar.navigationIcon =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.bottomAppBar.replaceMenu(R.menu.menu_main)
+                with(binding) {
+                    bottomAppBar.navigationIcon =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger)
+                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                    fab.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_plus
+                        )
+                    )
+                    bottomAppBar.replaceMenu(R.menu.menu_main)
+                }
             }
             isMain = !isMain
         }

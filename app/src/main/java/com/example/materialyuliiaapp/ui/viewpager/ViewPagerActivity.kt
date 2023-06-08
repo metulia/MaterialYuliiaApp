@@ -12,6 +12,7 @@ class ViewPagerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityViewPagerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.MyMoonTheme)
         super.onCreate(savedInstanceState)
 
         binding = ActivityViewPagerBinding.inflate(layoutInflater)

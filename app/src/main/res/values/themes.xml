@@ -18,6 +18,15 @@
         <item name="navigationIconTint">@color/white</item>
     </style>
 
+    <style name="MyTextAppearanceBody2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/cherry_swash</item>
+        <item name="android:fontFamily">@font/cherry_swash</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:letterSpacing">0.1178571429</item>
+    </style>
+
     <style name="MyEarthTheme" parent="Base.Theme.MaterialYuliiaApp">
         <item name="myColor">@color/RosyBrown</item>
         <item name="colorPrimary">@color/Chocolate</item>
@@ -30,14 +39,15 @@
     </style>
 
     <style name="MyMoonTheme" parent="Base.Theme.MaterialYuliiaApp">
-        <item name="myColor">@color/Gold</item>
-        <item name="colorPrimary">@color/LemonChiffon</item>
-        <item name="colorAccent">@color/PapayaWhip</item>
+        <item name="colorPrimary">@color/Goldenrod</item>
+        <item name="colorOnPrimary">@color/PapayaWhip</item>
+        <item name="colorPrimaryContainer">@color/Gold</item>
+        <item name="colorOnPrimaryContainer">@color/DarkGoldenRod</item>
         <item name="colorSurface">@color/Moccasin</item>
-        <item name="colorSecondary">@color/PaleGoldenrod</item>
+        <item name="colorSecondary">@color/DarkKhaki</item>
         <item name="colorOnSecondary">@color/Khaki</item>
-        <item name="colorTertiary">@color/DarkKhaki</item>
-        <item name="colorPrimaryContainer">@color/Yellow</item>
+        <item name="colorSecondaryContainer">@color/LemonChiffon</item>
+        <item name="colorOnSecondaryContainer">@color/Peru</item>
     </style>
 
     <style name="MyMarsTheme" parent="Base.Theme.MaterialYuliiaApp">
@@ -50,14 +60,9 @@
         <item name="colorTertiary">@color/Crimson</item>
         <item name="colorPrimaryContainer">@color/DarkSalmon</item>
     </style>
-    
-    <style name="MyTextAppearanceBody2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="fontFamily">@font/cherry_swash</item>
-        <item name="android:fontFamily">@font/cherry_swash</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:letterSpacing">0.1178571429</item>
+
+    <style name="SplashTheme" parent="Base.Theme.MaterialYuliiaApp">
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="Theme.MaterialYuliiaApp" parent="Base.Theme.MaterialYuliiaApp" />

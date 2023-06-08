@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.materialyuliiaapp.R
 import com.example.materialyuliiaapp.databinding.ActivityRecyclerBinding
 
 class RecyclerActivity : AppCompatActivity(), OnListItemClickListener {
@@ -30,6 +31,7 @@ class RecyclerActivity : AppCompatActivity(), OnListItemClickListener {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.MyMoonTheme)
         super.onCreate(savedInstanceState)
 
         binding = ActivityRecyclerBinding.inflate(layoutInflater)
